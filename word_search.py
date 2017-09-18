@@ -3,9 +3,11 @@
 class Word_search:
     def __init__(self, file_location):
         self.text_file = self.__get_text_file(file_location)
+        self.search_words = ["search"]
+
 
     def words_to_find(self):
-        return ["search"]
+        return  self.search_words
 
     def __get_text_file(self, file_location):
         self.__verify_crossword_puzzle(file_location)
