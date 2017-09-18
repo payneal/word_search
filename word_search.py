@@ -5,7 +5,7 @@ class Word_search:
         self.text_file = self.__get_text_file(file_location)
 
     def words_to_find(self):
-        return [1]
+        return ["search"]
 
     def __get_text_file(self, file_location):
         self.__verify_crossword_puzzle(file_location)
