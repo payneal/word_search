@@ -8,6 +8,9 @@ class Word_search:
         return [1]
 
     def __get_text_file(self, file_location):
+        self.__verify_crossword_puzzle(file_location)
+
+    def __verify_crossword_puzzle(self, file_location):
         try:
             f = open(file_location)
         except:
