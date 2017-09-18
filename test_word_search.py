@@ -21,9 +21,5 @@ class Test_Word_Case(unittest.TestCase):
             Word_search("./text_files/empty.txt")
 
  
-    
-
-
-
 if __name__ == '__main__':
     unittest.main()

@@ -9,3 +9,12 @@ class Word_search:
             f = open(file_location)
         except:
             raise ValueError("NO FILE FOUND")
+
+        if len(f.read().strip()) == 0:
+            raise ValueError("BLANK FILE")
+        
+        
+        print "this is file content length"
+
+        print len(file_content)
+
