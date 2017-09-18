@@ -20,6 +20,10 @@ class Test_Word_Case(unittest.TestCase):
         with self.assertRaisesRegexp(ValueError, "BLANK FILE"): 
             Word_search("./text_files/empty.txt")
 
- 
+    def test_word_serach_gets_all_search_words(self):
+        search = Word_search("./text_files/search_words_only.txt")
+        words = search.words_to_find()
+        self.assertEqual(len(words), 1)        
+
 if __name__ == '__main__':
     unittest.main()
