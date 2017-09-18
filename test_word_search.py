@@ -29,6 +29,11 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/search_words_only.txt")
         words = search.words_to_find()
         self.assertEqual(words,['search'])
+    
+    def test_word_search_tnrow_error_if_word_to_search_too_short(self):
+        with self.assertRaisesRegexp(ValueError, "INVALID SEARCH WORD"): 
+            Word_search("./text_files/too_small_word.txt")
+        
 
 if __name__ == '__main__':
     unittest.main()
