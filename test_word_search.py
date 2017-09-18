@@ -25,5 +25,10 @@ class Test_Word_Case(unittest.TestCase):
         words = search.words_to_find()
         self.assertEqual(len(words), 1)        
 
+    def test_word_search_actually_gets_words_in_requested_search(self):
+        search = Word_search("./text_files/search_words_only.txt")
+        words = search.words_to_find()
+        self.assertEqual(words,['search'])
+
 if __name__ == '__main__':
     unittest.main()
