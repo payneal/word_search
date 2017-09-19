@@ -9,79 +9,76 @@ class Word_search:
         self.__get_text_file(file_location)
         
 
+    def words_to_find(self):
+        return self.search_words
+
+    def show_puzzle(self):
+        return self.puzzle
+ 
     def solve(self): 
         for word in self.search_words:
-            self.start_looking(word)
+            self.__start_looking(word)
         return self.answer_string
 
-    def start_looking(self, word):
+    # helper functions
+    def __start_looking(self, word):
         for word_idx, letter in enumerate(word):
-            result= self.look_for_letter_in_puzzle(word, word_idx, letter)
+            result= self.__look_for_letter_in_puzzle(word, word_idx, letter)
             if result is True:
                 return True
 
-    def look_for_letter_in_puzzle(self, word, word_idx, letter):
+    def __look_for_letter_in_puzzle(self, word, word_idx, letter):
         self.answer_string += "{}: ".format(word)  
         hold= []
         for index_row, row  in enumerate(self.puzzle):
             for index_col, col in enumerate(row):
                 if letter == self.puzzle[index_row][index_col]:
                     hold.append((index_row,index_col))
-                    if self.check_for_next_letters(
+                    if self.__check_for_next_letters(
                             word, index_row, index_col, word_idx, hold)  is True:
                         return True
                         
 
-    def check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
+    def __check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
         for i in range(1, len(word)):
             if len(self.puzzle) <=  index_col+i:
-                return self.check_backwards(word, index_row, index_col, word_idx, hold) 
+                 return self.__check_certain_direction_in_reverse(
+                    word, index_row, index_col,word_idx, hold, "backwards")
             elif len(self.puzzle) <= index_row+i:
-                return self.check_vertical_bottom_to_top(word, index_row, index_col, word_idx, hold)
+                return self.__check_certain_direction_in_reverse(
+                    word, index_row, index_col,word_idx, hold, "bottom-up")
             elif self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
                 hold.append((index_row, index_col+i))
             elif self.puzzle[index_row +i][index_col] == word[word_idx+i]:
                 hold.append((index_row+i, index_col))
             else:
                 break
-        return self.create_answer_from_collected_cords(hold) 
-
-
-    def check_backwards(self, word, index_row, index_col, word_idx, hold):
-        for i in range(1, len(word)):
-            if len(self.puzzle) < index_col+i:
-                hold = []
-                break
-            if self.puzzle[index_row][index_col-i] == word[word_idx+ i]:
-                hold.append((index_row, index_col-i))
-            else:
-                break
-        return self.create_answer_from_collected_cords(hold)
+        return self.__create_answer_from_collected_cords(hold) 
   
-    def check_vertical_bottom_to_top(self, word, index_row, index_col, word_idx, hold):
+
+    def __check_certain_direction_in_reverse(self, word, index_row, index_col,word_idx, hold, direction):
         for i in range(1, len(word)):
             if len(self.puzzle) < index_col+i:
                 hold = []
                 break
-            if self.puzzle[index_row-i][index_col] == word[word_idx+ i]:
-                hold.append((index_row-i, index_col))
+            if direction == "bottom-up":
+                self.__reverse_check(index_row -i , index_col, word_idx+i, hold, word)
+            elif direction == "backwards":
+                self.__reverse_check(index_row, index_col-i, word_idx +i, hold, word)
             else:
                 break
-        return self.create_answer_from_collected_cords(hold)
-   
-
-    def create_answer_from_collected_cords(self, hold):
+        return self.__create_answer_from_collected_cords(hold)
+    
+    def __reverse_check(self, row_value, col_value, word_idx_value, hold, word):
+        if self.puzzle[row_value][col_value] == word[word_idx_value]:
+            hold.append((row_value, col_value))
+        
+    def __create_answer_from_collected_cords(self, hold):
         for x in hold:
             self.answer_string += str(x).replace(" ", "") + " , " 
         self.answer_string = self.answer_string[:-3]
         return True
- 
 
-    def words_to_find(self):
-        return self.search_words
-
-    def show_puzzle(self):
-        return self.puzzle
 
     def __get_text_file(self, file_location):
         self.__verify_file_and_search_words(file_location)
