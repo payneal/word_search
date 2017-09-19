@@ -69,8 +69,12 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/just_as_easy.txt")
         answer = search.solve()
         self.assertEqual(answer, "IT: (0,0) , (0,1)")
-
-  
+    
+    def test_get_puzzle_answer_response_searching_backwards(self):
+        search = Word_search("./text_files/backward_easy.txt")
+        answer = search.solve()
+        self.assertEqual(answer, "TO: (0,1) , (0,0)")
+    
 
 if __name__ == '__main__':
     unittest.main()
