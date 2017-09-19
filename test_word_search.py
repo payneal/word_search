@@ -43,6 +43,10 @@ class Test_Word_Case(unittest.TestCase):
         with self.assertRaisesRegexp(ValueError, "INVALID SEARCH WORD"):
             Word_search("./text_files/not_alphabet.txt")        
 
+    def test_word_in_search_two_big_for_puzzle(self):
+        with self.assertRaisesRegexp(ValueError, "INVALID SEARCH WORD"):
+            Word_search("./text_files/word_too_big_for_search.txt")
+
 
 if __name__ == '__main__':
     unittest.main()
