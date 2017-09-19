@@ -24,17 +24,23 @@ class Word_search:
 
     def look_for_letter_in_puzzle(self, word, word_idx, letter):
         self.answer_string += "{}: ".format(word)  
-        hold = []
+        hold= []
         for index_row, row  in enumerate(self.puzzle):
             for index_col, col in enumerate(row):
                 if letter == self.puzzle[index_row][index_col]:
                     hold.append((index_row,index_col))
-                    result = self.check_for_next_letters(word, index_row, index_col, word_idx, hold)
-                    if result is True:
+                    if self.check_for_next_letters(word, index_row, index_col, word_idx, hold)  is True:
                         return True
+                  
 
     def check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
         for i in range(1, len(word)):
+
+            if len(self.puzzle) <=  index_col+i:
+                return self.check_backwards(word, index_row, index_col, word_idx, hold) 
+
+                hold = []
+                break
             if self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
                 hold.append((index_row, index_col+i))
             else:
@@ -44,8 +50,24 @@ class Word_search:
         self.answer_string = self.answer_string[:-3]
         return True
 
+    def check_backwards(self, word, index_row, index_col, word_idx, hold):
 
-        
+        for i in range(1, len(word)):
+            if len(self.puzzle) < index_col+i:
+                hold = []
+                break
+            if self.puzzle[index_row][index_col-i] == word[word_idx+ i]:
+                hold.append((index_row, index_col-i))
+            else:
+                break
+        for x in hold:
+            self.answer_string += str(x).replace(" ", "") + " , " 
+        self.answer_string = self.answer_string[:-3]
+        return True
+ 
+
+
+
     def words_to_find(self):
         return self.search_words
 
