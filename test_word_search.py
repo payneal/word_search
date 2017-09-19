@@ -99,6 +99,11 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/backward_middle.txt")
         answer = search.solve()
         self.assertEqual(answer, "HA: (0,2) , (0,1)")
- 
+
+    def test_get_puzzle_answer_response_bottom_up_in_middle(self):
+        search = Word_search("./text_files/bottom_up_middle.txt")
+        answer = search.solve()
+        self.assertEqual(answer, "IN: (2,1) , (1,1)") 
+
 if __name__ == '__main__':
     unittest.main()
