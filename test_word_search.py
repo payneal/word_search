@@ -75,6 +75,10 @@ class Test_Word_Case(unittest.TestCase):
         answer = search.solve()
         self.assertEqual(answer, "TO: (0,1) , (0,0)")
     
+    def test_get_puzzle_answer_response_searching_vertical(self):
+        search = Word_search("./text_files/vertical_easy.txt")
+        answer = search.solve()
+        self.assertEqual(answer, "BE: (0,0) , (1,0)")
 
 if __name__ == '__main__':
     unittest.main()
