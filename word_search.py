@@ -14,13 +14,24 @@ class Word_search:
         with open(file_location, mode='r') as f:
             puzzle = [((x.strip()).replace(" ", "")).split(',') for x in f.readlines()[1:]]
         self.__verify_crossword_puzzle(puzzle)
-        
 
     def __verify_crossword_puzzle(self, puzzle):
+        puzzle_height = len(puzzle)
+        puzzle_width = []
+
         for line in puzzle:
+            puzzle_width.append(len(line))
             for word in self.search_words:
                 if len(word) > len(line):
                     raise ValueError("INVALID SEARCH WORD")
+    
+        if len(puzzle) > 0:
+            if puzzle_width[1:] == puzzle_width[:-1]:
+                if puzzle_width[0] != puzzle_height:
+                    raise ValueError("INVALID PUZZLE")
+            else:
+                raise ValueError("INVALID PUZZLE")
+
 
     def __verify_search_words(self, file_location):
         try:
