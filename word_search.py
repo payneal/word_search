@@ -5,27 +5,45 @@ class Word_search:
     def __init__(self, file_location):
         self.search_words = None
         self.puzzle = None
+        self.answer_string = ''
         self.__get_text_file(file_location)
         
-    def solve(self):
-        
-        answer_string = ""
+
+    def solve(self): 
         for word in self.search_words:
+            self.start_looking(word)
+        
+        return self.answer_string
+
+    def start_looking(self, word):
             for word_idx, letter in enumerate(word):
-                answer_string += "{}: ".format(word)  
-                hold= []
-                for index_row, row  in enumerate(self.puzzle):
-                    for index_col, col in enumerate(row):
-                        if letter == self.puzzle[index_row][index_col]:
-                            hold.append((index_row,index_col))
-                            for i in range(1, len(word)):
-                                if self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
-                                    hold.append((index_row, index_col+i))
-                                else:
-                                    break
-                            for x in hold:
-                                answer_string += str(x).replace(" ", "") + " , " 
-                            return answer_string[:-3]
+                result= self.look_for_letter_in_puzzle(word, word_idx, letter)
+                if result is True:
+                    return True
+
+
+    def look_for_letter_in_puzzle(self, word, word_idx, letter):
+        self.answer_string += "{}: ".format(word)  
+        hold = []
+        for index_row, row  in enumerate(self.puzzle):
+            for index_col, col in enumerate(row):
+                if letter == self.puzzle[index_row][index_col]:
+                    hold.append((index_row,index_col))
+                    result = self.check_for_next_letters(word, index_row, index_col, word_idx, hold)
+                    if result is True:
+                        return True
+
+    def check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
+        for i in range(1, len(word)):
+            if self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
+                hold.append((index_row, index_col+i))
+            else:
+                break
+        for x in hold:
+            self.answer_string += str(x).replace(" ", "") + " , " 
+        self.answer_string = self.answer_string[:-3]
+        return True
+
 
         
     def words_to_find(self):
