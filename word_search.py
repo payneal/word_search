@@ -7,9 +7,12 @@ class Word_search:
         self.puzzle = None
         self.__get_text_file(file_location)
         
+    def solve(self):
+        return "ME: (0,0) , (0,1)"
+        
     def words_to_find(self):
         return self.search_words
-    
+
     def show_puzzle(self):
         return self.puzzle
 
