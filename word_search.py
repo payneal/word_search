@@ -2,7 +2,6 @@
 
 class Word_search:
     def __init__(self, file_location):
-        self.file_location = None
         self.search_words = None
         self.__get_text_file(file_location)
         
@@ -22,16 +21,15 @@ class Word_search:
             f.close()
             self.__throw_error_message("BLANK FILE")
         f.close()
-    
+        self.__get_search_content(file_location)
+
+    def __get_search_content(self, file_location):
         with open(file_location, mode='r') as f:
             content = (f.readline()).split()
-
         for word in content:
             if len(word) < 2:
                 self.__throw_error_message("INVALID SEARCH WORD")
-    
         self.search_words = content
-
 
     def __throw_error_message(self, message):
         raise ValueError(message)
