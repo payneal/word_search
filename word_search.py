@@ -12,7 +12,9 @@ class Word_search:
     def __get_text_file(self, file_location):
         self.__verify_search_words(file_location)
         with open(file_location, mode='r') as f:
-            content = [x.strip() for x in f.readlines()[1:]]
+            content = [((x.strip()).replace(" ", "")).split(',') for x in f.readlines()[1:]]
+
+        print content
         self.__verify_crossword_puzzle(content)
 
     def __verify_crossword_puzzle(self, content):

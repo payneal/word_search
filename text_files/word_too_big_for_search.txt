@@ -1,4 +1,4 @@
 mississippi
-tsg
-gys
-gyh
+T, S, G
+G, Y, S
+G, Y, H
