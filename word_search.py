@@ -16,14 +16,16 @@ class Word_search:
         self.__verify_crossword_puzzle(puzzle)
 
     def __verify_crossword_puzzle(self, puzzle):
-        puzzle_height, puzzle_width = self.__check_search_words_vs_puzzle_size(
-            puzzle)
-        self.__check_puzzle_dimensions(puzzle, puzzle_width, puzzle_height)
+        if len(puzzle) == 0:
+            raise ValueError("NO PUZZLE ATTACHED")
+        else:
+            puzzle_height, puzzle_width = self.__check_search_words_vs_puzzle_size(
+                puzzle)
+            self.__check_puzzle_dimensions(puzzle, puzzle_width, puzzle_height)
 
     def __check_search_words_vs_puzzle_size(self, puzzle):
         puzzle_height = len(puzzle)
         puzzle_width = []
-
         for line in puzzle:
             puzzle_width.append(len(line))
             for word in self.search_words:

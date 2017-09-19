@@ -52,7 +52,7 @@ class Test_Word_Case(unittest.TestCase):
             Word_search("./text_files/bad_puzzle_size.txt")
 
     def test_verify_puzzle_exist_after_search(self):
-        with self.assertRaisesRegexp(ValueError, "NOT PUZZLE ATTACHED"):
+        with self.assertRaisesRegexp(ValueError, "NO PUZZLE ATTACHED"):
             Word_search("./text_files/no_puzzle_just_search.txt")
 
 
