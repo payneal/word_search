@@ -1,3 +1,4 @@
+import sys
 # word search
 
 class Word_search:
@@ -10,7 +11,14 @@ class Word_search:
 
     def __get_text_file(self, file_location):
         self.__verify_crossword_puzzle(file_location)
-            
+        with open(file_location, mode='r') as f:
+            content = [x.strip() for x in f.readlines()[1:]]
+       
+        for x in content:
+            for y in self.search_words:
+                if len(y) > len(x):
+                    raise ValueError("INVALID SEARCH WORD")
+
     def __verify_crossword_puzzle(self, file_location):
         try:
             f = open(file_location)
@@ -28,7 +36,7 @@ class Word_search:
         for word in content:
             self.__check_individal_search_word(word)
         self.search_words = content
-
+        
     def __check_individal_search_word(self, word):
         if len(word) < 2:
             raise ValueError("INVALID SEARCH WORD")
