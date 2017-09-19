@@ -29,6 +29,8 @@ class Word_search:
         for word in content:
             if len(word) < 2:
                 self.__throw_error_message("INVALID SEARCH WORD")
+            if not word.isalpha():
+                self.__throw_error_message("INVALID SEARCH WORD")
         self.search_words = content
 
     def __throw_error_message(self, message):
