@@ -60,8 +60,8 @@ class Test_Word_Case(unittest.TestCase):
         puzzle = search.show_puzzle()
         self.assertEqual(puzzle, [["M","E"],["I", "T"]])
     
-    def test_get_puzzle_answer_response_serching_vertical(self):
-        search = Word_search(",./text_files/easy_puzzle.txt")
+    def test_get_puzzle_answer_response_serching_horizontal(self):
+        search = Word_search("./text_files/easy_puzzle.txt")
         answer = search.solve()
         self.assertEqual(answer, "ME: (0,0) , (0,1)")
 
