@@ -38,6 +38,10 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/two_word_search.txt")
         words = search.words_to_find()
         self.assertEqual(words, ["search", "me"])
+    
+    def test_word_in_search_is_not_alphabet_letter(self):
+        with self.assertRaisesRegexp(ValueError, "INVALID SEARCH WORD"):
+            Word_search("./text_files/not_alphabet.txt")        
 
 
 if __name__ == '__main__':
