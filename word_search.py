@@ -12,15 +12,14 @@ class Word_search:
     def __get_text_file(self, file_location):
         self.__verify_search_words(file_location)
         with open(file_location, mode='r') as f:
-            content = [((x.strip()).replace(" ", "")).split(',') for x in f.readlines()[1:]]
+            puzzle = [((x.strip()).replace(" ", "")).split(',') for x in f.readlines()[1:]]
+        self.__verify_crossword_puzzle(puzzle)
+        
 
-        print content
-        self.__verify_crossword_puzzle(content)
-
-    def __verify_crossword_puzzle(self, content):
-        for x in content:
-            for y in self.search_words:
-                if len(y) > len(x):
+    def __verify_crossword_puzzle(self, puzzle):
+        for line in puzzle:
+            for word in self.search_words:
+                if len(word) > len(line):
                     raise ValueError("INVALID SEARCH WORD")
 
     def __verify_search_words(self, file_location):
