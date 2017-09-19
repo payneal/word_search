@@ -4,16 +4,21 @@ import sys
 class Word_search:
     def __init__(self, file_location):
         self.search_words = None
+        self.puzzle = None
         self.__get_text_file(file_location)
         
     def words_to_find(self):
         return self.search_words
+    
+    def show_puzzle(self):
+        return self.puzzle
 
     def __get_text_file(self, file_location):
         self.__verify_file_and_search_words(file_location)
         with open(file_location, mode='r') as f:
             puzzle = [((x.strip()).replace(" ", "")).split(',') for x in f.readlines()[1:]]
         self.__verify_crossword_puzzle(puzzle)
+        self.puzzle = puzzle
 
     def __verify_crossword_puzzle(self, puzzle):
         if len(puzzle) == 0:
