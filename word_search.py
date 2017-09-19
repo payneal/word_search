@@ -10,7 +10,7 @@ class Word_search:
         return self.search_words
 
     def __get_text_file(self, file_location):
-        self.__verify_search_words(file_location)
+        self.__verify_file_and_search_words(file_location)
         with open(file_location, mode='r') as f:
             puzzle = [((x.strip()).replace(" ", "")).split(',') for x in f.readlines()[1:]]
         self.__verify_crossword_puzzle(puzzle)
@@ -41,7 +41,7 @@ class Word_search:
             else:
                 raise ValueError("INVALID PUZZLE")
 
-    def __verify_search_words(self, file_location):
+    def __verify_file_and_search_words(self, file_location):
         try:
             f = open(file_location)
         except:
