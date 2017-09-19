@@ -51,6 +51,8 @@ class Word_search:
                 hold.append((index_row, index_col+i))
             elif self.puzzle[index_row +i][index_col] == word[word_idx+i]:
                 hold.append((index_row+i, index_col))
+            elif self.puzzle[index_row+i][index_col+i] == word[word_idx+i]:
+                hold.append((index_row+i, index_col+i))
             else:
                 break
         return self.__create_answer_from_collected_cords(hold) 
