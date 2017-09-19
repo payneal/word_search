@@ -41,15 +41,9 @@ class Word_search:
 
     def __check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
         for i in range(1, len(word)):
-            if len(self.puzzle) <= index_row+1 and len(self.puzzle) <= index_col+1:
-                return self.__check_certain_direction_in_reverse(
-                    word, index_row, index_col,word_idx, hold, "diagonally")
-            elif len(self.puzzle) <=  index_col+i:
-                 return self.__check_certain_direction_in_reverse(
-                    word, index_row, index_col,word_idx, hold, "backwards")
-            elif len(self.puzzle) <= index_row+i:
-                return self.__check_certain_direction_in_reverse(
-                    word, index_row, index_col,word_idx, hold, "bottom-up")
+            if len(self.puzzle) <= index_row+i or len(self.puzzle) <= index_col+i:
+                return self.__reverse_in_some_form_or_another(
+                    index_row, index_col, word_idx, hold, i, word)
             elif self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
                 hold.append((index_row, index_col+i))
             elif self.puzzle[index_row +i][index_col] == word[word_idx+i]:
@@ -60,6 +54,19 @@ class Word_search:
                 break
         return self.__create_answer_from_collected_cords(hold) 
   
+    
+    def __reverse_in_some_form_or_another(self, index_row, index_col, word_idx, hold, i, word):
+        if len(self.puzzle) <= index_row+i and len(self.puzzle) <= index_col+i:
+            return self.__check_certain_direction_in_reverse(
+                word, index_row, index_col,word_idx, hold, "diagonally")
+        elif len(self.puzzle) <=  index_col+i:
+             return self.__check_certain_direction_in_reverse(
+                word, index_row, index_col,word_idx, hold, "backwards")
+        elif len(self.puzzle) <= index_row+i:
+            return self.__check_certain_direction_in_reverse(
+                word, index_row, index_col,word_idx, hold, "bottom-up")
+
+
 
     def __check_certain_direction_in_reverse(self, word, index_row, index_col,word_idx, hold, direction):
         for i in range(1, len(word)):
