@@ -66,7 +66,7 @@ class Test_Word_Case(unittest.TestCase):
         self.assertEqual(answer, "ME: (0,0) , (0,1)")
 
     def test_get_puzzle_answer_response_serching_horizontal_2(self):
-        search = Word_search("./text_files/easy_puzzle.txt")
+        search = Word_search("./text_files/just_as_easy.txt")
         answer = search.solve()
         self.assertEqual(answer, "IT: (0,0) , (0,1)")
 

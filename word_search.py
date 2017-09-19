@@ -8,7 +8,25 @@ class Word_search:
         self.__get_text_file(file_location)
         
     def solve(self):
-        return "ME: (0,0) , (0,1)"
+        
+        answer_string = ""
+        for word in self.search_words:
+            for word_idx, letter in enumerate(word):
+                answer_string += "{}: ".format(word)  
+                hold= []
+                for index_row, row  in enumerate(self.puzzle):
+                    for index_col, col in enumerate(row):
+                        if letter == self.puzzle[index_row][index_col]:
+                            hold.append((index_row,index_col))
+                            for i in range(1, len(word)):
+                                if self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
+                                    hold.append((index_row, index_col+i))
+                                else:
+                                    break
+                            for x in hold:
+                                answer_string += str(x).replace(" ", "") + " , " 
+                            return answer_string[:-3]
+
         
     def words_to_find(self):
         return self.search_words
