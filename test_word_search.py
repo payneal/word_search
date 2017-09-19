@@ -37,7 +37,7 @@ class Test_Word_Case(unittest.TestCase):
     def test_word_search_get_all_seach_words_multiply_words(self):
         search = Word_search("./text_files/two_word_search.txt")
         words = search.words_to_find()
-        self.assertEqual(words, ["seach", "me"])
+        self.assertEqual(words, ["search", "me"])
 
 
 if __name__ == '__main__':
