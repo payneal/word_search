@@ -11,16 +11,14 @@ class Word_search:
 
     def solve(self): 
         for word in self.search_words:
-            self.start_looking(word)        
+            self.start_looking(word)
         return self.answer_string
 
-
     def start_looking(self, word):
-            for word_idx, letter in enumerate(word):
-                result= self.look_for_letter_in_puzzle(word, word_idx, letter)
-                if result is True:
-                    return True
-
+        for word_idx, letter in enumerate(word):
+            result= self.look_for_letter_in_puzzle(word, word_idx, letter)
+            if result is True:
+                return True
 
     def look_for_letter_in_puzzle(self, word, word_idx, letter):
         self.answer_string += "{}: ".format(word)  
@@ -31,8 +29,8 @@ class Word_search:
                     hold.append((index_row,index_col))
                     if self.check_for_next_letters(
                             word, index_row, index_col, word_idx, hold)  is True:
-                        return True       
-
+                        return True
+                  
 
     def check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
         for i in range(1, len(word)):
