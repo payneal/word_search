@@ -15,11 +15,10 @@ class Word_search:
         try:
             f = open(file_location)
         except:
-            self.__throw_error_message("NO FILE FOUND")
-
+            raise ValueError("NO FILE FOUND")
         if len(f.read().strip()) == 0:
             f.close()
-            self.__throw_error_message("BLANK FILE")
+            raise ValueError("BLANK FILE")
         f.close()
         self.__get_search_content(file_location)
 
@@ -27,11 +26,12 @@ class Word_search:
         with open(file_location, mode='r') as f:
             content = (f.readline()).split()
         for word in content:
-            if len(word) < 2:
-                self.__throw_error_message("INVALID SEARCH WORD")
-            if not word.isalpha():
-                self.__throw_error_message("INVALID SEARCH WORD")
+            self.__check_individal_search_word(word)
         self.search_words = content
 
-    def __throw_error_message(self, message):
-        raise ValueError(message)
+    def __check_individal_search_word(self, word):
+        if len(word) < 2:
+            raise ValueError("INVALID SEARCH WORD")
+        if not word.isalpha():
+            raise ValueError("INVALID SEARCH WORD")
+
