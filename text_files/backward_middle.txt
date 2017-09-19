@@ -1,5 +1,5 @@
 HA
-D, H, A, J
+D, A, H, J
 F, G, T, Y
 D, R, F, G
 D, X, F, G

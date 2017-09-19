@@ -98,8 +98,7 @@ class Test_Word_Case(unittest.TestCase):
     def test_get_puzzle_answer_response_backwards_in_middle(self):
         search = Word_search("./text_files/backward_middle.txt")
         answer = search.solve()
-        self.assertEqual(answer, "HA: (0,1) , (0,2)")
-
-
+        self.assertEqual(answer, "HA: (0,2) , (0,1)")
+ 
 if __name__ == '__main__':
     unittest.main()
