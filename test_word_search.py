@@ -89,6 +89,11 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/diagonally_decending_easy.txt")
         answer = search.solve()
         self.assertEqual(answer, "GO: (0,0) , (1,1)")
+    
+    def test_get_puzzle_answer_response_diagnally_accending(self):
+        search = Word_search("./text_files/diagonally_accending_easy.txt")
+        answer = search.solve()
+        self.assertEqual(answer, "BY: (1,1) , (0,0)")
 
 if __name__ == '__main__':
     unittest.main()
