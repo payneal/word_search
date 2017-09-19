@@ -36,6 +36,8 @@ class Word_search:
         for i in range(1, len(word)):
             if len(self.puzzle) <=  index_col+i:
                 return self.check_backwards(word, index_row, index_col, word_idx, hold) 
+            elif len(self.puzzle) <= index_row+i:
+                return self.check_vertical_bottom_to_top(word, index_row, index_col, word_idx, hold)
             elif self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
                 hold.append((index_row, index_col+i))
             elif self.puzzle[index_row +i][index_col] == word[word_idx+i]:
@@ -55,7 +57,18 @@ class Word_search:
             else:
                 break
         return self.create_answer_from_collected_cords(hold)
-
+  
+    def check_vertical_bottom_to_top(self, word, index_row, index_col, word_idx, hold):
+        for i in range(1, len(word)):
+            if len(self.puzzle) < index_col+i:
+                hold = []
+                break
+            if self.puzzle[index_row-i][index_col] == word[word_idx+ i]:
+                hold.append((index_row-i, index_col))
+            else:
+                break
+        return self.create_answer_from_collected_cords(hold)
+   
 
     def create_answer_from_collected_cords(self, hold):
         for x in hold:
