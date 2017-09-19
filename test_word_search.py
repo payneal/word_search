@@ -55,8 +55,10 @@ class Test_Word_Case(unittest.TestCase):
         with self.assertRaisesRegexp(ValueError, "NO PUZZLE ATTACHED"):
             Word_search("./text_files/no_puzzle_just_search.txt")
 
-
-
+    def test_show_the_puzzle(self):
+        search = Word_search("./text_files/easy_puzzle.txt")
+        puzzle = search.show_puzzle()
+        self.assertEqual(puzzle, [["M","E"],["I", "T"]])
 
 
 if __name__ == '__main__':
