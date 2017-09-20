@@ -37,7 +37,7 @@ class Test_Word_Case(unittest.TestCase):
     def test_word_search_get_all_seach_words_multiply_words(self):
         search = Word_search("./text_files/two_word_search.txt")
         words = search.words_to_find()
-        self.assertEqual(words, ["search", "me"])
+        self.assertEqual(words, ["SEARCH", "ME"])
     
     def test_word_in_search_is_not_alphabet_letter(self):
         with self.assertRaisesRegexp(ValueError, "INVALID SEARCH WORD"):
@@ -110,6 +110,12 @@ class Test_Word_Case(unittest.TestCase):
             "./text_files/diagonally_bottom_up_middle.txt")
         answer = search.solve()
         self.assertEqual(answer, "OF: (2,2) , (1,1)")
+
+    def test_get_puzzle_answer_response_with_two_words(self):
+        search = Word_search("./text_files/two_word_search.txt")
+        answer = search.solve()
+        self.assertEqual(answer, 
+                "SEARCH: (2,0) , (2,1) , (2,2) , (2,3) , (2,4) , (2,5) ME: (4,1) , (3,1)")
 
 if __name__ == '__main__':
     unittest.main()

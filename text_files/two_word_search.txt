@@ -1,7 +1,7 @@
-search me
-R,G,Y,U,I,H
-E,N,J,W,E,D
-D,G,T,Q,D,F
-D,P,O,U,H,F
-F,D,F,F,B,G
+SEARCH ME
+R,S,Y,U,I,H
+E,N,G,W,E,D
+S,E,A,R,C,H
+D,P,E,U,H,F
+F,D,M,F,B,G
 G,C,D,F,H,N
