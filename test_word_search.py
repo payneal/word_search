@@ -115,7 +115,7 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/two_word_search.txt")
         answer = search.solve()
         self.assertEqual(answer, 
-                "SEARCH: (2,0) , (2,1) , (2,2) , (2,3) , (2,4) , (2,5) ME: (4,1) , (3,1)")
+                "SEARCH: (2,0) , (2,1) , (2,2) , (2,3) , (2,4) , (2,5) ME: (4,2) , (3,2)")
 
 if __name__ == '__main__':
     unittest.main()
