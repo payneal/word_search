@@ -16,19 +16,24 @@ class Word_search:
         return self.puzzle
  
     def solve(self): 
-        for word in self.search_words:
-            self.__start_looking(word)
+        for word_count, word in enumerate(self.search_words):
+            self.__start_looking(word, word_count)
         return self.answer_string
 
     # helper functions
-    def __start_looking(self, word):
+    def __start_looking(self, word, word_count):
         for word_idx, letter in enumerate(word):
-            result= self.__look_for_letter_in_puzzle(word, word_idx, letter)
+            result= self.__look_for_letter_in_puzzle(word, word_count, word_idx, letter)
             if result is True:
                 return True
 
-    def __look_for_letter_in_puzzle(self, word, word_idx, letter):
+    def __look_for_letter_in_puzzle(self, word, word_count, word_idx, letter):
+        
+        if word_count > 0:
+            self.answer_string += " "
         self.answer_string += "{}: ".format(word)  
+        
+        
         hold= []
         for index_row, row  in enumerate(self.puzzle):
             for index_col, col in enumerate(row):
@@ -37,61 +42,107 @@ class Word_search:
                     if self.__check_for_next_letters(
                             word, index_row, index_col, word_idx, hold)  is True:
                         return True
+                    else:
+                        hold = []
                         
+    def __check_for_next_letters(
+            self, word, index_row, index_col, word_idx, hold):
+        if index_row +1 >= len(self.puzzle) or index_col + 1 >= len(self.puzzle):
 
-    def __check_for_next_letters(self, word, index_row, index_col, word_idx, hold):
-        for i in range(1, len(word)):
-            if len(self.puzzle) <= index_row+i or len(self.puzzle) <= index_col+i:
-                return self.__reverse_in_some_form_or_another(
-                    index_row, index_col, word_idx, hold, i, word)
-            elif self.puzzle[index_row][index_col+i] == word[word_idx+ i]:
-                hold.append((index_row, index_col+i))
-            elif self.puzzle[index_row +i][index_col] == word[word_idx+i]:
-                hold.append((index_row+i, index_col))
-            elif self.puzzle[index_row+i][index_col+i] == word[word_idx+i]:
-                hold.append((index_row+i, index_col+i))
-            elif self.puzzle[index_row][index_col-i] == word[word_idx+i]:
-                hold.append((index_row, index_col-i))
-            elif self.puzzle[index_row-i][index_col] == word[word_idx+i]:
-                hold.append((index_row-i, index_col))
-            elif self.puzzle[index_row -i][index_col-i] == word[word_idx+i]:
-                hold.append((index_row-i, index_col-i))
+            if self.puzzle[index_row][index_col-1] == word[word_idx+1]:
+                # check if word backwards
+                return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold, "backwards")
+
+            elif self.puzzle[index_row-1][index_col] == word[word_idx+1]:
+                # check if bottom up reverse
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold, 
+                    "bottom-up")
+
+            elif self.puzzle[index_row -1][index_col-1] == word[word_idx+1]:
+                # check if diagonally accend
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold,
+                    "diagonally-accend")
             else:
-                break
-        return self.__create_answer_from_collected_cords(hold) 
-  
-    
-    def __reverse_in_some_form_or_another(self, index_row, index_col, word_idx, hold, i, word):
-        if len(self.puzzle) <= index_row+i and len(self.puzzle) <= index_col+i:
-            return self.__check_certain_direction_in_reverse(
-                word, index_row, index_col,word_idx, hold, "diagonally")
-        elif len(self.puzzle) <=  index_col+i:
-             return self.__check_certain_direction_in_reverse(
-                word, index_row, index_col,word_idx, hold, "backwards")
-        elif len(self.puzzle) <= index_row+i:
-            return self.__check_certain_direction_in_reverse(
-                word, index_row, index_col,word_idx, hold, "bottom-up")
+                return False
+                
+        else: 
 
+            if self.puzzle[index_row][index_col+1] == word[word_idx+ 1]:
+                #check if straight
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold, "straight")
 
+            elif self.puzzle[index_row +1][index_col] == word[word_idx+1]:
+                #check if down
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold, "down")
 
-    def __check_certain_direction_in_reverse(self, word, index_row, index_col,word_idx, hold, direction):
+            elif self.puzzle[index_row+1][index_col+1] == word[word_idx+1]:
+                # check if diagonally decend
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold,
+                    "diagonally-descend")
+           
+            
+            elif self.puzzle[index_row][index_col-1] == word[word_idx+1]:
+                # check if word backwards
+                return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold, "backwards")
+
+            elif self.puzzle[index_row-1][index_col] == word[word_idx+1]:
+                # check if bottom up reverse
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold, 
+                    "bottom-up")
+
+            elif self.puzzle[index_row -1][index_col-1] == word[word_idx+1]:
+                # check if diagonally accend
+                 return self.__check_certain_direction(
+                    word, index_row, index_col, word_idx, hold,
+                    "diagonally-accend")
+            else:
+                return False
+        
+    def __check_certain_direction(
+            self, word, index_row, index_col,word_idx, hold, direction):
+        
+        result = True
         for i in range(1, len(word)):
-            if len(self.puzzle) < index_col+i:
-                hold = []
-                break
             if direction == "bottom-up":
-                self.__reverse_check(index_row -i , index_col, word_idx+i, hold, word)
+                result = self.__do_check(
+                    index_row -i , index_col, word_idx+i, hold, word)
             elif direction == "backwards":
-                self.__reverse_check(index_row, index_col-i, word_idx +i, hold, word)
-            elif direction == "diagonally":
-                self.__reverse_check(index_row-i, index_col-i, word_idx +i, hold, word)
-            else:
-                break
+                result = self.__do_check(
+                    index_row, index_col-i, word_idx +i, hold, word)
+            elif direction == "diagonally-accend":
+                result = self.__do_check(
+                    index_row-i, index_col-i, word_idx +i, hold, word)
+            elif direction == "straight":
+                if i + index_col > len(self.puzzle):
+                    return False
+                result = self.__do_check(
+                    index_row, index_col+i, word_idx +i, hold, word)
+            elif direction == "down":
+                result = self.__do_check(
+                    index_row+i, index_col, word_idx +i, hold, word)
+            elif direction == "diagonally-descend":
+                 result = self.__do_check(
+                    index_row+i, index_col+i, word_idx +i, hold, word)
+            if result == False:
+                return False
+
         return self.__create_answer_from_collected_cords(hold)
     
-    def __reverse_check(self, row_value, col_value, word_idx_value, hold, word):
+    def __do_check(self, row_value, col_value, word_idx_value, hold, word):
+
         if self.puzzle[row_value][col_value] == word[word_idx_value]:
             hold.append((row_value, col_value))
+            return True
+        else:
+            return False
         
     def __create_answer_from_collected_cords(self, hold):
         for x in hold:
