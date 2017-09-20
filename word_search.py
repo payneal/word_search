@@ -176,9 +176,12 @@ class Word_search:
     def __get_search_content(self, file_location):
         with open(file_location, mode='r') as f:
             content = (f.readline()).split()
+        words = []
         for word in content:
-            self.__check_individal_search_word(word)
-        self.search_words = content
+            hold = word.split(',')
+            self.__check_individal_search_word(hold[0])
+            words.append(hold[0])
+        self.search_words = words
 
 
     def __check_individal_search_word(self, word):
