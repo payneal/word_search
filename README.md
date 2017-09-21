@@ -1,4 +1,17 @@
 # Word Search Kata
+* completed
+
+## to implement the solution
+* using python 2.7
+* can create virtualenv if you want but no pip installs where used
+* add from word_search import Word_search 
+* search = Word_search('fileLocation.txt')
+* search.solve()
+* will print out all cross word puzzle answers 
+
+# Instructions
+
+
 
 * Given a text file consisting of a list of words, and a series of rows of single-character lists representing the word search grid, this program should search for the words in the grid and return a set of x,y coordinates for each word found
 
