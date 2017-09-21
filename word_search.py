@@ -58,9 +58,7 @@ class Word_search:
         if len(word) <=  word_idx +1:
             return False
 
-
-
-        if len(self.puzzle) > index_col + 1 and self.puzzle[index_row][index_col+1] == word[word_idx+ 1]:
+        if self.puzzle[index_row][index_col+1] == word[word_idx+ 1]:
              return self.__check_certain_direction(word, index_row, index_col, word_idx, hold, "straight")
         
         elif self.puzzle[index_row +1][index_col] == word[word_idx+1]:
@@ -75,11 +73,8 @@ class Word_search:
         if len(word) <=  word_idx +1:
             return False
 
-
-
-
         if word_found == False:
-            if index_col -1 >= 0 and word_idx +1 <= len(word) and self.puzzle[index_row][index_col-1] == word[word_idx+1]:
+            if index_col -1 >= 0 and self.puzzle[index_row][index_col-1] == word[word_idx+1]:
                 word_found = self.__check_certain_direction(word, index_row, index_col, word_idx, hold, "backwards")
 
             if index_row - 1>= 0 and self.puzzle[index_row-1][index_col] == word[word_idx+1]:
@@ -108,8 +103,6 @@ class Word_search:
 
     def __check_certain_direction(
             self, word, index_row, index_col,word_idx, hold, direction):
-       
-
 
         result = True
         for i in range(1, len(word)):
@@ -140,8 +133,7 @@ class Word_search:
 
         if word_idx_value  > len(word)-1:
             return False
-
-        if self.puzzle[row_value][col_value] == word[word_idx_value]:
+        elif  self.puzzle[row_value][col_value] == word[word_idx_value]:
             hold.append((row_value, col_value))
             return True
         else:
