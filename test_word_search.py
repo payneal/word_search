@@ -100,6 +100,16 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/diagonally_accending_easy.txt")
         answer = search.solve()
         self.assertEqual(answer, "BY: (1,1) , (0,0)")
+    
+    def test_get_puzzle_answer_response_diagnally_accending_opp(self):
+        search = Word_search("./text_files/diagonally_accending_easy_opp.txt")
+        answer = search.solve()
+        self.assertEqual(answer, "BO: (1,0) , (0,1)")
+   
+    def test_get_puzzle_answer_response_diagnally_accending(self):
+        search = Word_search("./text_files/diagonally_accending_easy.txt")
+        answer = search.solve()
+        self.assertEqual(answer, "BY: (1,1) , (0,0)")
 
     def test_get_puzzle_answer_response_backwards_in_middle(self):
         search = Word_search("./text_files/backward_middle.txt")
