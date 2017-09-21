@@ -85,8 +85,6 @@ class Word_search:
                      if self.puzzle[index_row +1][index_col-1] == word[word_idx+1]:
                         word_found = self.__check_certain_direction(
                             word, index_row, index_col, word_idx, hold, "diagonally-descend-back")
-                else:    
-                    print "word = {}".format(word)
             return word_found
    
     def __check_certain_direction(
