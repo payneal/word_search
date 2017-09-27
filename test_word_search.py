@@ -139,11 +139,19 @@ class Test_Word_Case(unittest.TestCase):
         expected = "BONES: (0,6) , (0,7) , (0,8) , (0,9) , (0,10)"
         self.assertEqual(answer, expected)
 
-    def test_pillar_example_one(self):
+    def test_pillar_example_two(self):
         search = Word_search("./text_files/pillar_ex/two.txt")
         answer = search.solve()
         expected = "BONES: (0,6) , (0,7) , (0,8) , (0,9) , (0,10) KHAN: (5,9) , (5,8) , (5,7) , (5,6)"
         self.assertEqual(answer, expected)
+
+    def test_pillar_example_three(self):
+        search = Word_search("./text_files/pillar_ex/three.txt")
+        answer = search.solve()
+        expected = "BONES: (0,6) , (0,7) , (0,8) , (0,9) , (0,10) KHAN: (5,9) , (5,8) , (5,7) , (5,6) KIRK: (4,7) , (3,7) , (2,7) , (1,7)"
+        self.assertEqual(answer, expected)
+
+
 
 
 
