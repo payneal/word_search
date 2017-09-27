@@ -35,9 +35,7 @@ class Word_search:
         for index_row, row  in enumerate(self.puzzle):
             for index_col, col in enumerate(row):
                 if letter == self.puzzle[index_row][index_col]:
-                    hold.append((index_row,index_col))
-                    if self.__check_for_next_letters(
-                            word, index_row, index_col, word_idx, hold)  is True:
+                    if self.__check_for_next_letters(word, index_row, index_col, word_idx, hold):
                         return True
                     else:
                         hold = []
@@ -52,20 +50,23 @@ class Word_search:
 
     def __check_all_possibilities(self, index_row, index_col, word_idx, hold, word):
        
+        result = False 
+
         if index_col + 1 > len(word) or index_row + 1 > len(word):
-            return self.__check_word_is_reversed(index_row, index_col, word_idx, hold, word) 
+ 
+            result = self.__check_word_is_reversed(index_row, index_col, word_idx, hold, word) 
       
         if len(word) <=  word_idx +1:
             return False
 
-        if self.puzzle[index_row][index_col+1] == word[word_idx+ 1]:
-             return self.__check_certain_direction(word, index_row, index_col, word_idx, hold, "straight")
+        if result == False and self.puzzle[index_row][index_col+1] == word[word_idx+ 1]:
+            result = self.__check_certain_direction(word, index_row, index_col, word_idx, hold, "straight")
         
-        elif self.puzzle[index_row +1][index_col] == word[word_idx+1]:
-             return self.__check_certain_direction(word, index_row, index_col, word_idx, hold, "down")
+        if result == False and self.puzzle[index_row +1][index_col] == word[word_idx+1]:
+            result = self.__check_certain_direction(word, index_row, index_col, word_idx, hold, "down")
         
-        elif self.puzzle[index_row+1][index_col+1] == word[word_idx+1]:
-             return self.__check_certain_direction(word, index_row, index_col, word_idx, hold,"diagonally-descend-forward")
+        if self.puzzle[index_row+1][index_col+1] == word[word_idx+1]:
+            result = self.__check_certain_direction(word, index_row, index_col, word_idx, hold,"diagonally-descend-forward")
     
     
     def __check_word_is_reversed(self, index_row, index_col, word_idx, hold, word):
@@ -105,8 +106,8 @@ class Word_search:
             self, word, index_row, index_col,word_idx, hold, direction):
 
         result = True
-        for i in range(1, len(word)):
-       
+        for i in range(0, len(word)):
+
             if direction == "bottom-up":
                 result = self.__do_check(index_row -i , index_col, word_idx+i, hold, word)
             elif direction == "backwards":
@@ -134,7 +135,7 @@ class Word_search:
         if word_idx_value  > len(word)-1:
             return False
         elif  self.puzzle[row_value][col_value] == word[word_idx_value]:
-            hold.append((row_value, col_value))
+            hold.append((col_value, row_value))
             return True
         else:
             return False

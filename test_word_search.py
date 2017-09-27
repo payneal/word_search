@@ -63,27 +63,27 @@ class Test_Word_Case(unittest.TestCase):
     def test_get_puzzle_answer_response_serching_horizontal(self):
         search = Word_search("./text_files/easy_puzzle.txt")
         answer = search.solve()
-        self.assertEqual(answer, "ME: (0,0) , (0,1)")
+        self.assertEqual(answer, "ME: (0,0) , (1,0)")
 
     def test_get_puzzle_answer_response_serching_horizontal_2(self):
         search = Word_search("./text_files/just_as_easy.txt")
         answer = search.solve()
-        self.assertEqual(answer, "IT: (0,0) , (0,1)")
+        self.assertEqual(answer, "IT: (0,0) , (1,0)")
     
     def test_get_puzzle_answer_response_searching_backwards(self):
         search = Word_search("./text_files/backward_easy.txt")
         answer = search.solve()
-        self.assertEqual(answer, "TO: (0,1) , (0,0)")
+        self.assertEqual(answer, "TO: (1,0) , (0,0)")
     
     def test_get_puzzle_answer_response_searching_vertical(self):
         search = Word_search("./text_files/vertical_easy.txt")
         answer = search.solve()
-        self.assertEqual(answer, "BE: (0,0) , (1,0)")
+        self.assertEqual(answer, "BE: (0,0) , (0,1)")
 
     def test_get_puzzle_answer_response_searching_vertical_2(self):
         search = Word_search("./text_files/vertical_as_easy.txt")
         answer = search.solve()
-        self.assertEqual(answer, "AT: (1,0) , (0,0)")
+        self.assertEqual(answer, "AT: (0,1) , (0,0)")
     
     def test_get_puzzle_answer_response_diagonally_descending(self):
         search = Word_search("./text_files/diagonally_decending_easy.txt")
@@ -94,7 +94,7 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search(
             "./text_files/diagonally_decending_easy_opp.txt")
         answer = search.solve()
-        self.assertEqual(answer, "MA: (0,1) , (1,0)")
+        self.assertEqual(answer, "MA: (1,0) , (0,1)")
 
     def test_get_puzzle_answer_response_diagnally_accending(self):
         search = Word_search("./text_files/diagonally_accending_easy.txt")
@@ -104,7 +104,7 @@ class Test_Word_Case(unittest.TestCase):
     def test_get_puzzle_answer_response_diagnally_accending_opp(self):
         search = Word_search("./text_files/diagonally_accending_easy_opp.txt")
         answer = search.solve()
-        self.assertEqual(answer, "BO: (1,0) , (0,1)")
+        self.assertEqual(answer, "BO: (0,1) , (1,0)")
    
     def test_get_puzzle_answer_response_diagnally_accending(self):
         search = Word_search("./text_files/diagonally_accending_easy.txt")
@@ -114,12 +114,12 @@ class Test_Word_Case(unittest.TestCase):
     def test_get_puzzle_answer_response_backwards_in_middle(self):
         search = Word_search("./text_files/backward_middle.txt")
         answer = search.solve()
-        self.assertEqual(answer, "HA: (0,2) , (0,1)")
+        self.assertEqual(answer, "HA: (2,0) , (1,0)")
 
     def test_get_puzzle_answer_response_bottom_up_in_middle(self):
         search = Word_search("./text_files/bottom_up_middle.txt")
         answer = search.solve()
-        self.assertEqual(answer, "IN: (2,1) , (1,1)") 
+        self.assertEqual(answer, "IN: (1,2) , (1,1)") 
 
     def test_get_puzzle_answer_response_diagonally_bottom_up_middle(self):
         search = Word_search(
@@ -131,7 +131,7 @@ class Test_Word_Case(unittest.TestCase):
         search = Word_search("./text_files/two_word_search.txt")
         answer = search.solve()
         self.assertEqual(answer, 
-            "SEARCH: (2,0) , (2,1) , (2,2) , (2,3) , (2,4) , (2,5) ME: (4,2) , (3,2)")
+            "SEARCH: (0,2) , (1,2) , (2,2) , (3,2) , (4,2) , (5,2) ME: (2,4) , (2,3)")
 
     def test_pillar_example(self):
         search = Word_search("./text_files/pillar_ex/one.txt")
